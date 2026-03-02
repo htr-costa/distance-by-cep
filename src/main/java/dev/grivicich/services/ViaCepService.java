@@ -1,6 +1,6 @@
 package dev.grivicich.services;
 
-import dev.grivicich.dto.AdressDto;
+import dev.grivicich.dto.AddressDto;
 import tools.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
@@ -11,9 +11,9 @@ import java.net.http.HttpResponse;
 
 public class ViaCepService {
 
-    AdressDto adress = new AdressDto();
+    AddressDto address = new AddressDto();
 
-    public AdressDto getAdress(String cep) throws IOException, InterruptedException {
+    public AddressDto getAddress(String cep) throws IOException, InterruptedException {
         try {
             HttpClient cliente = HttpClient.newHttpClient();
             HttpRequest request = HttpRequest.newBuilder()
@@ -22,12 +22,12 @@ public class ViaCepService {
 
             ObjectMapper mapper = new ObjectMapper();
 
-            adress = mapper.readValue(response.body(), AdressDto.class);
+            address = mapper.readValue(response.body(), AddressDto.class);
 
         } catch (Exception e){
             System.out.println(e.getMessage());
         }
-        return adress;
+        return address;
     }
 
 

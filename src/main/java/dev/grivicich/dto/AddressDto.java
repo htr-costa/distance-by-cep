@@ -4,7 +4,7 @@ package dev.grivicich.dto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class AdressDto {
+public class AddressDto {
     private String cep;
     private String logradouro;
     private String complemento;
@@ -125,7 +125,7 @@ public class AdressDto {
 
     @Override
     public String toString() {
-        return "AdressDto{" +
+        return "AddressDto{" +
                 "cep='" + cep + '\'' +
                 ", logradouro='" + logradouro + '\'' +
                 ", complemento='" + complemento + '\'' +
