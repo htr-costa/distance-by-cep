@@ -8,27 +8,52 @@ import java.util.Scanner;
 
 public class Main {
 
+    private static final boolean DEBUG = true;
+
     public static void main(String[] args) {
 
         ViaCepService viaCepService = new ViaCepService();
         GeoService geoService = new GeoService();
 
         Scanner in = new Scanner(System.in);
-        System.out.print("Informe o CEP: ");
-        String cep = in.nextLine();
+        System.out.print("Informe o primeiro CEP: ");
+        String firstCep = in.nextLine();
+        System.out.println("Informe o segundo CEP: ");
+        String secondCep = in.nextLine();
 
         try {
-            AddressDto address = viaCepService.getAddress(cep); // random-generated cep for testing
+            AddressDto address1 = viaCepService.getAddress(firstCep);
 
-            System.out.println("Endereço encontrado:");
-            System.out.println(address);
+            if (DEBUG) {
+                System.out.println("Endereço encontrado:");
+                System.out.println(address1);
+            }
 
-            GeoDto geo = geoService.getCoords(address);
+            AddressDto address2 = viaCepService.getAddress(secondCep);
 
-            System.out.println("\nCoordenadas:");
-            System.out.println(geo);
+            if (DEBUG) {
+                System.out.println("Endereço encontrado:");
+                System.out.println(address2);
+            }
+
+            GeoDto geo1 = geoService.getCoords(address1);
+            GeoDto geo2 = geoService.getCoords(address2);
+
+            if (DEBUG) {
+                System.out.println("\nCoordenadas:");
+                System.out.println(geo1);
+                System.out.println(geo2);
+            }
+
+            System.out.println("Distância de Vôo de Pássaro:");
+            double distance = geoService.calculateDistance(geo1, geo2);
+            System.out.println(String.format("%.2f km", distance));
+
+
         } catch (Exception e) {
             System.out.println("Erro ao buscar informacoes do CEP informado.");
         }
+
+        in.close();
     }
 }
